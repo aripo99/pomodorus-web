@@ -8,7 +8,7 @@ export default function Home() {
       <div className='flex flex-col space-y-14'>
         <header className='flex items-center justify-between py-4 border-b border-gray-100 dark:border-slate-800'>
           <Link href='/'>
-            <b>Title here</b>
+            <b>Pomodorus</b>
           </Link>
 
           <div>
@@ -23,12 +23,12 @@ export default function Home() {
         <div className='flex flex-row justify-between items-center space-x-8'>
           <div className='flex-1'>
             <h1 className='text-4xl lg:text-6xl 2xl:text-7xl font-semibold text-left'>
-              Title here
+              Pomodorus
             </h1>
 
             <h2 className='text-lg xl:text-2xl text-gray-400 font-light'>
               <p>
-                Some text here
+                Focus your time with the Pomodoro technique
               </p>
 
               <p>
@@ -39,7 +39,7 @@ export default function Home() {
 
           <div className='flex-1'>
             <Image
-              src="/avatar.jpg"
+              src="/pomodorus.jpeg"
               alt="Avatar"
               className="dark:invert"
               width={600}
@@ -72,11 +72,11 @@ export default function Home() {
         <div className='flex flex-col space-y-12'>
           <div className='flex flex-col space-y-2'>
             <h2 className='text-2xl font-semibold text-center'>
-              Title Here
+              Pomodorus
             </h2>
 
             <h3 className='text-lg text-center text-gray-400'>
-              Some text here
+              Focus on your tasks and start cooking
             </h3>
           </div>
         </div>
@@ -85,10 +85,7 @@ export default function Home() {
 
         <footer className='py-6'>
           <div className='flex flex-col space-y-4 lg:flex-row lg:space-y-0 justify-between'>
-            <b>Title here</b>
-            <div>
-              Text here
-            </div>
+            <b>Pomodorus</b>
 
             <div className='flex space-x-4'>
               <Button variant='link'>

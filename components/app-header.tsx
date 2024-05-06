@@ -5,7 +5,7 @@ function AppHeader() {
     return (
         <div className='p-4 border-b border-gray-40 dark:border-slate-800 flex justify-between items-center'>
             <Link href='/dashboard'>
-                <b>Name Here</b>
+                <b>Pomodorus</b>
             </Link>
 
             <ProfileDropdown />
