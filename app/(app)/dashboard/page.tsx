@@ -1,7 +1,9 @@
+import { ProgressBar } from './components/progress';
+
 function DashboardPage() {
     return (
         <div>
-            <h1>Dashboard</h1>
+            <ProgressBar />
         </div>
     );
 }
