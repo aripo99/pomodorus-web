@@ -10,7 +10,7 @@ async function AppLayout(props: React.PropsWithChildren) {
     }
 
     return (
-        <div className="flex flex-col flex-1 space-y-4">
+        <div className="p-4 flex flex-col flex-1 space-y-4">
             <AppHeader />
 
             {props.children}
