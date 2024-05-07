@@ -24,9 +24,9 @@ export function ProgressBar() {
         return () => clearInterval(interval);
     }, [timerActive, remainingTime]);
 
-    const startTimer = () => {
+    const toggleTimer = () => {
         setRemainingTime(minutes * 60);
-        setTimerActive(true);
+        setTimerActive((active) => !active);
     };
 
     const formatTime = (time: number) => {
@@ -56,8 +56,8 @@ export function ProgressBar() {
                     <p className="mt-2"> {formatTime(remainingTime)} </p>
                 </div>
                 <div className="flex justify-center">
-                    <Button className="w-full max-w-[200px]" id="start-timer" onClick={startTimer}>
-                        Start Timer
+                    <Button className="w-full max-w-[200px]" id="start-timer" onClick={toggleTimer}>
+                        {timerActive ? "Stop Timer" : "Start Timer"}
                     </Button>
                 </div>
             </div>
