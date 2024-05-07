@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 export function ProgressBar() {
     const [task, setTask] = useState('');
@@ -12,7 +13,7 @@ export function ProgressBar() {
     const [timerActive, setTimerActive] = useState(false);
 
     useEffect(() => {
-        let interval = null;
+        let interval: undefined | number | NodeJS.Timeout = undefined;
         if (timerActive && remainingTime > 0) {
             interval = setInterval(() => {
                 setRemainingTime((time) => time - 1);
@@ -30,8 +31,7 @@ export function ProgressBar() {
 
     const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        return `${minutes} minutes remaining`;
     };
 
     return (
@@ -51,19 +51,9 @@ export function ProgressBar() {
                         <Input id="minutes" placeholder="Enter minutes" type="number" value={minutes} onChange={(e) => setMinutes(e.target.value)} />
                     </div>
                 </div>
-                <div className="relative w-full max-w-xs mx-auto">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl font-bold text-gray-900 dark:text-gray-100">
-                            <span id="remaining-time">{formatTime(remainingTime)}</span>
-                        </div>
-                    </div>
-                    <div className="relative w-full h-0 pb-[100%] rounded-full bg-gradient-to-r from-primary to-primary/50 overflow-hidden">
-                        <div
-                            className="absolute inset-0 bg-gray-200 dark:bg-gray-800 transition-all duration-[1500ms] ease-linear"
-                            id="timer-progress"
-                            style={{ transform: `scaleY(${1 - remainingTime / (minutes * 60)})` }}
-                        />
-                    </div>
+                <div className="text-center">
+                    <Progress value={remainingTime / (minutes * 60) * 100} />
+                    <p className="mt-2"> {formatTime(remainingTime)} </p>
                 </div>
                 <div className="flex justify-center">
                     <Button className="w-full max-w-[200px]" id="start-timer" onClick={startTimer}>
