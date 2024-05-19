@@ -40,6 +40,7 @@ export function ProgressBar() {
         }
         else {
             setTaskId('');
+            setTask('');
             updateTask(taskId, 'failed');
         }
         setTimerActive((active) => !active);
