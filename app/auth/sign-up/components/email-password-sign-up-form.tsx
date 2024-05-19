@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import useSignUp from "../../hooks/use-sign-up";
 
 function EmailPasswordSignUpForm() {
-    const { isPending, isSuccess, isError, mutateAsync } = useSignUp();
+    const { isLoading, isSuccess, isError, mutateAsync } = useSignUp();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
@@ -56,8 +56,8 @@ function EmailPasswordSignUpForm() {
                     isError ? <ErrorAlert /> : null
                 }
 
-                <Button disabled={isPending}>
-                    {isPending ? 'Signing up...' : 'Sign Up'}
+                <Button disabled={isLoading}>
+                    {isLoading ? 'Signing up...' : 'Sign Up'}
                 </Button>
             </div>
         </form>

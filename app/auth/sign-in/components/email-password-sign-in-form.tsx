@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import useSignInWithPassword from '@/app/auth/hooks/use-sign-in-with-password';
 
 function EmailPasswordSignInForm() {
-    const { isPending, isError, mutateAsync } = useSignInWithPassword();
+    const { isLoading, isError, mutateAsync } = useSignInWithPassword();
     const router = useRouter();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement>
@@ -56,8 +56,8 @@ function EmailPasswordSignInForm() {
                     isError ? <ErrorAlert /> : null
                 }
 
-                <Button disabled={isPending}>
-                    {isPending ? 'Signing in...' : 'Sign In'}
+                <Button disabled={isLoading}>
+                    {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
             </div>
         </form>
