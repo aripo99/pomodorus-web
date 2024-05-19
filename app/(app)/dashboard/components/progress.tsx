@@ -6,12 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { addTask } from "@/lib/actions/add-task";
+import { updateTask } from "@/lib/actions/update-task";
 
 export function ProgressBar() {
     const [task, setTask] = useState('');
     const [minutes, setMinutes] = useState(25);
     const [remainingTime, setRemainingTime] = useState(1500); // 25 minutes * 60 seconds
     const [timerActive, setTimerActive] = useState(false);
+    const [taskId, setTaskId] = useState('');
 
     useEffect(() => {
         let interval: undefined | number | NodeJS.Timeout = undefined;
@@ -22,7 +24,7 @@ export function ProgressBar() {
         }
         else if (timerActive && remainingTime <= 0) {
             setTimerActive(false);
-            addTask(task, minutes);
+            updateTask(taskId, 'completed');
         }
         else if (!timerActive && remainingTime !== 0) {
             clearInterval(interval);
@@ -30,8 +32,16 @@ export function ProgressBar() {
         return () => clearInterval(interval);
     }, [timerActive, remainingTime, minutes]);
 
-    const toggleTimer = () => {
+    async function toggleTimer() {
         setRemainingTime(minutes * 60);
+        if (!timerActive) {
+            const data: any = await addTask(task, minutes);
+            setTaskId(data.data.id || '');
+        }
+        else {
+            setTaskId('');
+            updateTask(taskId, 'failed');
+        }
         setTimerActive((active) => !active);
     };
 
@@ -54,7 +64,7 @@ export function ProgressBar() {
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="minutes">How many minutes?</Label>
-                        <Input id="minutes" placeholder="Enter minutes" type="number" value={minutes} onChange={(e) => setMinutes(e.target.value)} />
+                        <Input id="minutes" placeholder="Enter minutes" type="number" value={minutes} onChange={(e) => setMinutes(e.target.value ? parseInt(e.target.value) : 0)} />
                     </div>
                 </div>
                 )}
