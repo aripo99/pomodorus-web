@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { addTask } from "@/lib/actions/add-task";
 
 export function ProgressBar() {
     const [task, setTask] = useState('');
@@ -18,11 +19,16 @@ export function ProgressBar() {
             interval = setInterval(() => {
                 setRemainingTime((time) => time - 1);
             }, 1000);
-        } else if (!timerActive && remainingTime !== 0) {
+        }
+        else if (timerActive && remainingTime <= 0) {
+            setTimerActive(false);
+            addTask(task, minutes);
+        }
+        else if (!timerActive && remainingTime !== 0) {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [timerActive, remainingTime]);
+    }, [timerActive, remainingTime, minutes]);
 
     const toggleTimer = () => {
         setRemainingTime(minutes * 60);
